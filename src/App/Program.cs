@@ -7,9 +7,17 @@ namespace App
         public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Fibonnaci Sequence!");
-            Console.WriteLine("Enter the sequence number of the number to be calculated:");
-            int sequence = int.Parse(Console.ReadLine());
-            Console.WriteLine("The number is {0}", CalculateFibonacci(sequence));
+            if(args.Length == 1)
+            {
+                int sequence = int.Parse(args[0]);
+                Console.WriteLine("The number is {0}", CalculateFibonacci(sequence));
+            } else{
+                Console.WriteLine("Enter the sequence number of the number to be calculated:");
+                int sequence = int.Parse(Console.ReadLine());
+                Console.WriteLine("The number is {0}", CalculateFibonacci(sequence));
+            }
+        
+
         }
 
         private static int CalculateFibonacci(int sequence)
