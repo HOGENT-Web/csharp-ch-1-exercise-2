@@ -52,4 +52,82 @@ If we follow the family tree of Honeybees, it represents the Fibonacci sequence 
 > You should be able to use the following command to give the result of 3 : `dotnet run 5`
 
 ## Solution
-A possible solution can be found [here](https://github.com/HOGENT-Web/csharp-ch-1-exercise-2/tree/solution#solution).
+- Use a `dotnet` command to create a new console application called `App`
+  ```console
+  dotnet new console -o App
+  ```
+- Do **NOT** remove all the boilerplate in `Program.cs` (you'll need it in the extra)
+- Create a new `static` method which returns an `integer` called `CalculateFibonnaci` which takes an `integer` as parameter
+  ```cs
+  private static int CalculateFibonnaci(int sequence){
+    // Implementation...
+  }
+  ```
+- Implement the fibonnaci algorithm in the `CalculateFibonnaci` function. When you provide `5` as a parameter, the fibonnaci number should be returned, `5` in this case. 
+  ```cs
+  private static int CalculateFibonacci(int sequence)
+  {
+      int number1 = 0;
+      int number2 = 1;
+      int number = 0;
+
+      switch (sequence)
+      {
+          case 0:
+              number = number1;
+              break;
+          case 1:
+              number = number2;
+              break;
+          default:
+              {
+                  for (int i = 3; i <= sequence; i++)
+                  {
+                      number = number1 + number2;
+                      number1 = number2;
+                      number2 = number;
+                  }
+                  break;
+              }
+      }
+      return number;
+  }
+  ```
+- In the `Main` method: 
+  - Ask the user to input a number and reading it into a variable using [`Console.ReadLine()`](https://www.geeksforgeeks.org/console-readline-method-in-c-sharp/).
+    ```cs
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Enter the sequence number of the number to be calculated:");
+        int sequence = int.Parse(Console.ReadLine());
+    }
+    ```
+  - Use the `CalculateFibonnaci` function to return the fibonacci number to the user. For example: 5 = 3, since it's the 5th number in the sequence.
+    ```cs
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Welcome to Fibonnaci Sequence!");
+        Console.WriteLine("Enter the sequence number of the number to be calculated:");
+        int sequence = int.Parse(Console.ReadLine());
+        Console.WriteLine("The number is {0}", CalculateFibonacci(sequence));
+    }
+    ```
+### Extra
+- Use the first parameters of the [`Main(string[] args)`](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/main-command-line) to provide the number from the console. If the collection of arguments is empty, ask the user to provided the number.
+  > You should be able to use the following command to give the result of 3 : `dotnet run 5`
+
+  ```cs
+  public static void Main(string[] args)
+  {
+      Console.WriteLine("Welcome to Fibonnaci Sequence!");
+      if(args.Length == 1)
+      {
+          int sequence = int.Parse(args[0]);
+          Console.WriteLine("The number is {0}", CalculateFibonacci(sequence));
+      } else{
+          Console.WriteLine("Enter the sequence number of the number to be calculated:");
+          int sequence = int.Parse(Console.ReadLine());
+          Console.WriteLine("The number is {0}", CalculateFibonacci(sequence));
+      }
+  }
+  ```
